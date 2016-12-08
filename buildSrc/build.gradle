@@ -1,0 +1,12 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile 'com.android.tools.build:gradle:1.5.0'
+    compile 'org.javassist:javassist:3.22.0-CR1'
+    compile 'org.ow2.asm:asm:6.0_ALPHA'
+}
+
+repositories {
+    mavenCentral()
+}
