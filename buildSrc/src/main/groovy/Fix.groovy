@@ -20,14 +20,6 @@ class Fix implements Plugin<Project> {
     void apply(Project project) {
         def android = project.extensions.findByType(AppExtension)
         android.registerTransform(new FixTransform(project))
-        //        DefaultDomainObjectSet<ApplicationVariant> variants
-        //        if (project.getPlugins().hasPlugin(AppPlugin)) {
-        //            variants = project.android.applicationVariants
-        //            project.extensions.create(EXTENSION_NAME, FixExtension)
-        //            applyTask(project, variants)
-        //        }
-        //        def android = project.extensions.findByType(AppExtension)
-        //        android.registerTransform(new FixTransform())
     }
 
     private void applyTask(Project project, DomainObjectCollection<BaseVariant> variants) {

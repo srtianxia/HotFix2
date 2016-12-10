@@ -38,7 +38,7 @@ class FixTransform extends Transform {
             Collection<TransformInput> referencedInputs, TransformOutputProvider outputProvider,
             boolean isIncremental) throws IOException, TransformException, InterruptedException {
         println(" ------------ transform ------------")
-        def libPath = project.project(':hack').buildDir.absolutePath.concat("\\intermediates\\classes\\debug\\com\\srtianxia\\hack")
+        def libPath = project.project(':hack').buildDir.absolutePath.concat("/intermediates/classes/debug")
         println(" -----  ${libPath} ----- ")
         ClassInject.appendClassPath(libPath)
         inputs.each { TransformInput input ->

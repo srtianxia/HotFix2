@@ -7,7 +7,7 @@ import javassist.CtConstructor
 public class ClassInject {
 
     private static ClassPool pool = ClassPool.getDefault()
-    private static String injectStr = "System.out.println(\"23333 .... \");";
+    private static String injectStr = "System.out.println(com.srtianxia.hack.Hack.class);";
 
     public static void appendClassPath(String libPath) {
         pool.appendClassPath(libPath)
