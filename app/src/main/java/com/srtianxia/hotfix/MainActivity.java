@@ -1,5 +1,6 @@
 package com.srtianxia.hotfix;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,24 +9,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.srtianxia.hotfix.A.A;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
+    A a = new A();
+    RxPermissions permissions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        permissions = RxPermissions.getInstance(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        permissions.request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-                new A();
+                Snackbar.make(view, a.method(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
             }
         });
     }

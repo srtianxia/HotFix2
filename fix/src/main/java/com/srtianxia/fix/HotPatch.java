@@ -9,12 +9,9 @@ import java.io.IOException;
 import dalvik.system.DexClassLoader;
 
 /**
- * Created by hp on 2016/4/11.
+ * Created by srtianxia on 2016/12/10.
  */
 public class HotPatch {
-
-//    private HotPatch() {}
-
     private static Context mContext;
 
     public static void init(Context context) {

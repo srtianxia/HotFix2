@@ -5,4 +5,7 @@ package com.srtianxia.hotfix.A;
  */
 
 public class A {
+    public String method() {
+        return "I'M A";
+    }
 }
