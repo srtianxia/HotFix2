@@ -1,15 +1,12 @@
 package com.srtianxia.hotfix
 
 import com.android.build.gradle.AppExtension
-import com.android.build.gradle.AppPlugin
-import com.android.build.gradle.api.ApplicationVariant
 import com.android.build.gradle.api.BaseVariant
 import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.internal.DefaultDomainObjectSet
 
-class FixPlugin implements Plugin<Project> {
+class Fix implements Plugin<Project> {
     private static final String EXTENSION_NAME = "fix"
     private static final String FIX_DIR = "fix"
     private static final String VERSION = "version"

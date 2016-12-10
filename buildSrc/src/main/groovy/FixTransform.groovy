@@ -38,15 +38,15 @@ class FixTransform extends Transform {
             Collection<TransformInput> referencedInputs, TransformOutputProvider outputProvider,
             boolean isIncremental) throws IOException, TransformException, InterruptedException {
         println(" ------------ transform ------------")
-        def libPath = project.project(':hack').buildDir.absolutePath.concat("\\classes\\main\\com\\srtianxia")
-
+        def libPath = project.project(':hack').buildDir.absolutePath.concat("\\intermediates\\classes\\debug\\com\\srtianxia\\hack")
+        println(" -----  ${libPath} ----- ")
         ClassInject.appendClassPath(libPath)
         inputs.each { TransformInput input ->
             //对类型为“文件夹”的input进行遍历
             input.directoryInputs.each { DirectoryInput directoryInput ->
 
                 //文件夹里面包含的是我们手写的类以及R.class、BuildConfig.class以及R$XXX.class等
-                ClassInject.injectDir(directoryInput.file.absolutePath, "com\\srtianxia\\hotfix\\A")
+                ClassInject.injectDir(directoryInput.file.absolutePath, "com/srtianxia/hotfix/A")
                 // 获取output目录
                 def dest = outputProvider.getContentLocation(directoryInput.name,
                         directoryInput.contentTypes, directoryInput.scopes,

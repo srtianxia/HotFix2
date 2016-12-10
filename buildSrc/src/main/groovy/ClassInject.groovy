@@ -3,17 +3,11 @@ package com.srtianxia.hotfix
 import javassist.ClassPool
 import javassist.CtClass
 import javassist.CtConstructor
-import org.objectweb.asm.ClassReader
-import org.objectweb.asm.ClassVisitor
-import org.objectweb.asm.ClassWriter
-import org.objectweb.asm.MethodVisitor
-import org.objectweb.asm.Opcodes
-import org.objectweb.asm.Type
 
 public class ClassInject {
 
     private static ClassPool pool = ClassPool.getDefault()
-    private static String injectStr = "System.out.println(FixHack.class);";
+    private static String injectStr = "System.out.println(\"23333 .... \");";
 
     public static void appendClassPath(String libPath) {
         pool.appendClassPath(libPath)
@@ -29,7 +23,7 @@ public class ClassInject {
                 //确保当前文件是class文件，并且不是系统自动生成的class文件
                 if (filePath.endsWith(".class") && !filePath.contains('R$') &&
                         !filePath.contains('R.class') &&
-                        !filePath.contains("BuildConfig.class")) {
+                        !filePath.contains("BuildConfig.class") &&!filePath.contains("HotFixApplication.class")) {
                     // 判断当前目录是否是在我们的应用包里面
                     int index = filePath.indexOf(packageName);
                     boolean isMyPackage = index != -1;
@@ -62,32 +56,5 @@ public class ClassInject {
                 }
             }
         }
-    }
-
-
-    //refer hack class when object init
-    private static byte[] referHackWhenInit(InputStream inputStream) {
-        ClassReader cr = new ClassReader(inputStream);
-        ClassWriter cw = new ClassWriter(cr, 0);
-        ClassVisitor cv = new ClassVisitor(Opcodes.ASM4, cw) {
-            @Override
-            public MethodVisitor visitMethod(int access, String name, String desc,
-                    String signature, String[] exceptions) {
-
-                MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
-                mv = new MethodVisitor(Opcodes.ASM4, mv) {
-                    @Override
-                    void visitInsn(int opcode) {
-                        if ("<init>".equals(name) && opcode == Opcodes.RETURN) {
-                            super.visitLdcInsn(Type.getType("Lcom/srtianxia/hotfix/FixHack;"));
-                        }
-                        super.visitInsn(opcode);
-                    }
-                }
-                return mv;
-            }
-        };
-        cr.accept(cv, 0);
-        return cw.toByteArray();
     }
 }
